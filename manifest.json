@@ -1,25 +1,48 @@
 {
-  "name": "X-Man",
+  "name": "My extension",
   "manifest_version": 2,
   "description" : "toolbox for hacker",
   "version": "1.0",
-  "options_page": "options.html",
-  "devtools_page": "devtools.html",
+  "author": "lsong",
+  "options_page": "options/options.html",
+  "devtools_page": "devtools/devtools.html",
   "background": {
-    "page": "background.html"
+    "page": "background/background.html"
+  },
+  "omnibox": {
+    "keyword": "test"
   },
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "content_scripts":[{
     "matches" : [ "<all_urls>"  ],
-    "css"     : [ "content.css" ],
-    "js"      : [ "content.js"  ]
+    "css"     : [ "content/content.css" ],
+    "js"      : [ "content/content.js"  ]
   }],
+  "chrome_ui_overrides" : {
+    "bookmarks_ui": {
+      "remove_button": "true",
+      "remove_bookmark_shortcut": "true"
+    }
+  },
+  "chrome_url_overrides" : {
+    "newtab"   : "page/newtab.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
   "permissions": [
+    "storage",
+    "cookies",
+    "topSites",
+    "bookmarks",
     "background",
+    "contextMenus",
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
-  ]
+  ],
+  "update_url": "https://lsong.org"
 }

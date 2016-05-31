@@ -1,5 +1,5 @@
 ;(function(){
-  
+
   var tabs = document.querySelector('.tabs');
   tabs.addEventListener('click', function(ev){
     var el = ev.target;
