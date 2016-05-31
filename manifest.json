@@ -20,12 +20,6 @@
     "css"     : [ "content/content.css" ],
     "js"      : [ "content/content.js"  ]
   }],
-  "chrome_ui_overrides" : {
-    "bookmarks_ui": {
-      "remove_button": "true",
-      "remove_bookmark_shortcut": "true"
-    }
-  },
   "chrome_url_overrides" : {
     "newtab"   : "page/newtab.html"
   },
@@ -34,12 +28,19 @@
     "chrome_style": true
   },
   "permissions": [
+    "tabs",
+    "debugger",
     "storage",
+    "history",
     "cookies",
     "topSites",
+    "downloads",
     "bookmarks",
     "background",
     "contextMenus",
+    "notifications",
+    "clipboardRead",
+    "clipboardWrite",
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
