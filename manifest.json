@@ -4,11 +4,8 @@
   "description" : "toolbox for hacker",
   "version": "1.0",
   "author": "lsong",
-  "options_page": "options/options.html",
+  "options_page" : "options/options.html",
   "devtools_page": "devtools/devtools.html",
-  "background": {
-    "page": "background/background.html"
-  },
   "omnibox": {
     "keyword": "test"
   },
@@ -20,6 +17,9 @@
     "css"     : [ "content/content.css" ],
     "js"      : [ "content/content.js"  ]
   }],
+  "background": {
+    "page": "background/background.html"
+  },
   "chrome_url_overrides" : {
     "newtab"   : "page/newtab.html"
   },
@@ -45,5 +45,6 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
-  "update_url": "https://lsong.org"
+  "update_url": "https://lsong.org",
+  "homepage_url": "http://lsong.org"
 }

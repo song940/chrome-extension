@@ -9,3 +9,7 @@ chrome.devtools.panels.elements.createSidebarPane("My Sidebar", function(sidebar
   sidebar.setPage("./devtools/sidebar.html");
   // sidebar.setObject({ some_data: "Some data to show" });
 });
+
+var backgroundConnection = chrome.runtime.connect({
+	name : "devtools-page"
+});

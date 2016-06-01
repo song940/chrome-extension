@@ -1,4 +1,21 @@
 
+chrome.runtime.onConnect.addListener(function(port) {
+	console.log('connect: ', port.name);
+});
+
+
+chrome.browserAction.setBadgeBackgroundColor({
+	color: [80, 80, 80, 255]
+});
+chrome.browserAction.setBadgeText({
+	text: "3"
+});
+
+chrome.cookies.getAll({}, function(cookies){
+	console.log('cookies: ', cookies);
+});
+
+
 chrome.webRequest.onBeforeSendHeaders.addListener(function(request){
   console.log(request);
 }, {
