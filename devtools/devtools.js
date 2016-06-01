@@ -1,15 +1,36 @@
+var name = 'devtools-page';
 
+var tabId = chrome.devtools.inspectedWindow.tabId;
+
+var port = chrome.runtime.connect({ name : name });
+
+port.onMessage.addListener(function(msg){
+  alert(msg.action);
+  switch(msg.action){
+    case '':
+    break;
+  }
+});
 
 chrome.devtools.panels.create("Cookie", "icon.png", "./devtools/panel.html", function(panel) {
-  // code invoked on panel creation
+  
+  panel.onShown.addListener(function(){
+    // TODO:
+  });
+
+});
+
+chrome.devtools.panels.create("Request", "icon.png", "./devtools/request.html", function(panel) {
+  
+  panel.onShown.addListener(function(){
+    // TODO:
+  });
+
 });
 
 chrome.devtools.panels.elements.createSidebarPane("My Sidebar", function(sidebar) {
-  // sidebar initialization code here
   sidebar.setPage("./devtools/sidebar.html");
   // sidebar.setObject({ some_data: "Some data to show" });
 });
 
-var backgroundConnection = chrome.runtime.connect({
-	name : "devtools-page"
-});
+

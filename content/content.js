@@ -1,6 +1,6 @@
 
 console.log('content.js');
 
-var backgroundConnection = chrome.runtime.connect({
+var port = chrome.runtime.connect({
 	name : "content-page"
 });

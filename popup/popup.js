@@ -1,8 +1,6 @@
 
 console.log('popup');
 
-
-
-var backgroundConnection = chrome.runtime.connect({
+var port = chrome.runtime.connect({
 	name : "popup-page"
 });

@@ -2,150 +2,25 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>X-Man</title>
+<title>Options Page</title>
 <style>
-
-body{
-  width: 90%;
-  margin: 100px auto;
-}
-
-.tabs{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.tabs li{
-  display: inline-block;
-}
-
-.tab{
+h1{
   display: none;
 }
-
-.form-cell{
-  
-}
-
-label{
-  display: block;
-}
-
-table{
-  width: 100%;
-}
-
-table th,
-table td{
-  border: 1px solid #ccc;
-}
-
 </style>
 </head>
 <body>
   <header>
-    <h1>X-Man</h1>
-    <p>toolbox for hacker</p>
+    <h1>Options Page</h1>
   </header>
-  <section>
+  <div>
     <nav>
-      <ul class="tabs" >
-        <li class="active"><a href="#profiles">Profiles</a></li>
-        <li><a href="#rules">Rules</a></li>
+      <ul>
+        <li><a href="">Cookie</a></li>
+        <li><a href="">Basic Auth</a></li>
       </ul>
     </nav>
-    
-    <div id="profiles" class="tab" style="display: block;" >
-      
-      <form action="">
-        <fieldset>
-          
-          <legend>Profiles</legend>
-          
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>AppID</th>
-              <th>AppSecret</th>
-            </tr>
-          </table>
-          
-        </fieldset>
-      </form>
-      
-      <form action="">
-        <fieldset name="profiles" >
-          
-          <legend>Create Profile</legend>
-          
-          <div class="form-cell">
-            <label for="">Name</label>
-            <input type="text" name="name" value="">
-          </div>
-          
-          <div class="form-cell">
-            <label for="appId">AppID</label>
-            <input type="text" id="appId" name="appId" value="">
-          </div>
-          
-          <div class="form-cell">
-            <label for="appSecret">AppSecret</label>
-            <input type="text" id="appSecret" name="appSecret" value="">
-          </div>
-          
-          <button>add</button>
-          
-        </fieldset>
-      </form>
-    </div>
-    
-    <div id="rules" class="tab" >
-      
-      <fieldset>
-        
-        <legend>Rules</legend>
-        
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>URL Pattern</th>
-            <th>Profile</th>
-          </tr>
-          <tr></tr>
-        </table>
-      </fieldset>
-      
-      <form class="" action="index.html" method="post">
-        
-        <fieldset>
-          
-          <legend>Create Rule</legend>
-          
-          <div class="form-cell">
-            <label for="">Name</label>
-            <input type="text" name="name" value="">
-          </div>
-          
-          <div class="form-cell">
-            <label for="">URL Pattern</label>
-            <input type="text" name="name" value="">
-          </div>
-          
-          <div class="form-cell">
-            <label for="">Profile</label>
-            <input type="text" name="name" value="">
-          </div>
-          
-          <button>add</button>
-          
-        </fieldset>
-        
-      </form>
-      
-      
-    </div>
-    
-  </section>
+  </div>
 </body>
 <script src="options.js"></script>
 </html>

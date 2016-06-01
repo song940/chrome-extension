@@ -1,28 +1,63 @@
 
+
 chrome.runtime.onConnect.addListener(function(port) {
 	console.log('connect: ', port.name);
-});
 
+  function onMessage(msg){
+    console.log('message: ', msg, port.name);
+
+    chrome.tabs.get(msg.tabId, function(tab){
+
+
+      chrome.cookies.getAll({ url: tab.url }, function(cookies){
+        port.postMessage({
+          action: 'cookies',
+          result: cookies
+        });
+      });
+
+    });
+    
+  }
+
+  port.onMessage.addListener(onMessage);
+  port.onDisconnect.addListener(function(port){
+    console.log('Port %s has disconnected', port.name);
+    port.onMessage.removeListener(onMessage);
+  });
+
+});
 
 chrome.browserAction.setBadgeBackgroundColor({
 	color: [80, 80, 80, 255]
 });
+
 chrome.browserAction.setBadgeText({
 	text: "3"
 });
 
-chrome.cookies.getAll({}, function(cookies){
-	console.log('cookies: ', cookies);
-});
 
+/**
+ * webRequest
+ */
+var filter = { urls: [ "<all_urls>" ] };
 
-chrome.webRequest.onBeforeSendHeaders.addListener(function(request){
-  console.log(request);
-}, {
-  urls: [ "<all_urls>" ]
-}, [ "blocking", "requestHeaders" ]);
+chrome.webRequest.onBeforeRequest.addListener(function(details) { 
+  return { cancel: false };
+}, filter, [ 'blocking' ]);
 
+chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
+  var headers = details.requestHeaders;
+  headers.push({ name: 'Date', value: '' + new Date });
+  return {requestHeaders: headers };
+}, filter, [ 'blocking', 'requestHeaders' ]);
 
+chrome.webRequest.onSendHeaders.addListener(function(details) { 
+}, filter, [ 'requestHeaders' ]);
+
+/**
+ * contextMenus
+ */
 var menu = chrome.contextMenus.create({
   title    : 'My extension',
   contexts : [ 'all' ],
@@ -30,8 +65,6 @@ var menu = chrome.contextMenus.create({
     alert('1');
   }
 });
-
-
 
 var menu = chrome.contextMenus.create({
   type     : 'normal',
@@ -42,3 +75,14 @@ var menu = chrome.contextMenus.create({
     alert('2');
   }
 });
+
+chrome.notifications.create(null, {
+  type: 'basic',
+  iconUrl: 'https://api.lsong.org/qr?text=icon',
+  title: document.title,
+  message: 'hello world'
+}, function(){
+
+});
+
+// chrome.tabs.create({url:'https://lsong.org'});
