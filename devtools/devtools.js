@@ -20,17 +20,7 @@ chrome.devtools.panels.create("Cookie", "icon.png", "./devtools/panel.html", fun
 
 });
 
-chrome.devtools.panels.create("Request", "icon.png", "./devtools/request.html", function(panel) {
-  
-  panel.onShown.addListener(function(){
-    // TODO:
-  });
-
-});
-
 chrome.devtools.panels.elements.createSidebarPane("My Sidebar", function(sidebar) {
   sidebar.setPage("./devtools/sidebar.html");
-  // sidebar.setObject({ some_data: "Some data to show" });
+  sidebar.setObject({ some_data: "Some data to show" });
 });
-
-

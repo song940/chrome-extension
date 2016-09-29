@@ -1,14 +1,26 @@
 
+chrome.browserAction.setBadgeBackgroundColor({
+	color: [80, 80, 80, 255]
+});
+
+chrome.browserAction.setBadgeText({
+	text: "3"
+});
 
 chrome.runtime.onConnect.addListener(function(port) {
 	console.log('connect: ', port.name);
-
+	/**
+	 * [onMessage description]
+	 * @param  {[type]} msg [description]
+	 * @return {[type]}     [description]
+	 */
   function onMessage(msg){
     console.log('message: ', msg, port.name);
 
     chrome.tabs.get(msg.tabId, function(tab){
-
-
+			/**
+			 * [getAll description]
+			 */
       chrome.cookies.getAll({ url: tab.url }, function(cookies){
         port.postMessage({
           action: 'cookies',
@@ -17,8 +29,8 @@ chrome.runtime.onConnect.addListener(function(port) {
       });
 
     });
-    
-  }
+		
+  };
 
   port.onMessage.addListener(onMessage);
   port.onDisconnect.addListener(function(port){
@@ -28,13 +40,6 @@ chrome.runtime.onConnect.addListener(function(port) {
 
 });
 
-chrome.browserAction.setBadgeBackgroundColor({
-	color: [80, 80, 80, 255]
-});
-
-chrome.browserAction.setBadgeText({
-	text: "3"
-});
 
 
 /**
@@ -42,7 +47,7 @@ chrome.browserAction.setBadgeText({
  */
 var filter = { urls: [ "<all_urls>" ] };
 
-chrome.webRequest.onBeforeRequest.addListener(function(details) { 
+chrome.webRequest.onBeforeRequest.addListener(function(details) {
   return { cancel: false };
 }, filter, [ 'blocking' ]);
 
@@ -52,7 +57,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
   return {requestHeaders: headers };
 }, filter, [ 'blocking', 'requestHeaders' ]);
 
-chrome.webRequest.onSendHeaders.addListener(function(details) { 
+chrome.webRequest.onSendHeaders.addListener(function(details) {
 }, filter, [ 'requestHeaders' ]);
 
 /**
@@ -66,7 +71,7 @@ var menu = chrome.contextMenus.create({
   }
 });
 
-var menu = chrome.contextMenus.create({
+var submenu = chrome.contextMenus.create({
   type     : 'normal',
   title    : 'Test',
   parentId : menu,

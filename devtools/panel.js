@@ -17,7 +17,7 @@ port.postMessage({ action: 'request-cookies', tabId: tabId });
 var keys = [ 'Name', 'Value', 'Domain', 'Path', 'Expires/Max-Age', 'Size', 'HTTP', 'Secure', 'Samsite' ];
 
 function renderTable(cookies){
-  var table = document.createElement('table');  
+  var table = document.createElement('table');
   cookies.map(function(cookie){
     var tr = document.createElement('tr');
     Object.keys(cookie).map(function(key){
