@@ -7,32 +7,32 @@ chrome.browserAction.setBadgeText({
 	text: "3"
 });
 
+var menu = chrome.contextMenus.create({
+  title    : 'My extension',
+  contexts : [ 'all' ],
+  onclick  : function(){
+    alert('1');
+  }
+});
+
+var submenu = chrome.contextMenus.create({
+  type     : 'normal',
+  title    : 'Test',
+  parentId : menu,
+  contexts : [ 'selection' ],
+  onclick  : function(){
+    alert('2');
+  }
+});
+
+
 chrome.runtime.onConnect.addListener(function(port) {
 	console.log('connect: ', port.name);
-	/**
-	 * [onMessage description]
-	 * @param  {[type]} msg [description]
-	 * @return {[type]}     [description]
-	 */
-  function onMessage(msg){
-    console.log('message: ', msg, port.name);
 
-    chrome.tabs.get(msg.tabId, function(tab){
-			/**
-			 * [getAll description]
-			 */
-      chrome.cookies.getAll({ url: tab.url }, function(cookies){
-        port.postMessage({
-          action: 'cookies',
-          result: cookies
-        });
-      });
-
-    });
-		
-  };
-
-  port.onMessage.addListener(onMessage);
+  port.onMessage.addListener(function onMessage(msg){
+	  console.log('message: ', msg, port.name);
+	});
+	
   port.onDisconnect.addListener(function(port){
     console.log('Port %s has disconnected', port.name);
     port.onMessage.removeListener(onMessage);
@@ -40,6 +40,21 @@ chrome.runtime.onConnect.addListener(function(port) {
 
 });
 
+function getCookies(tabId, callback){
+	chrome.tabs.get(tabId, function(tab){
+		chrome.cookies.getAll({ url: tab.url }, callback);
+	});
+};
+
+
+chrome.notifications.create(null, {
+  type: 'basic',
+  iconUrl: 'https://api.lsong.org/qr?text=icon',
+  title: document.title,
+  message: 'hello world'
+}, function(){
+
+});
 
 
 /**
@@ -59,35 +74,5 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
 
 chrome.webRequest.onSendHeaders.addListener(function(details) {
 }, filter, [ 'requestHeaders' ]);
-
-/**
- * contextMenus
- */
-var menu = chrome.contextMenus.create({
-  title    : 'My extension',
-  contexts : [ 'all' ],
-  onclick  : function(){
-    alert('1');
-  }
-});
-
-var submenu = chrome.contextMenus.create({
-  type     : 'normal',
-  title    : 'Test',
-  parentId : menu,
-  contexts : [ 'selection' ],
-  onclick  : function(){
-    alert('2');
-  }
-});
-
-chrome.notifications.create(null, {
-  type: 'basic',
-  iconUrl: 'https://api.lsong.org/qr?text=icon',
-  title: document.title,
-  message: 'hello world'
-}, function(){
-
-});
 
 // chrome.tabs.create({url:'https://lsong.org'});

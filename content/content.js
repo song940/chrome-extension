@@ -3,12 +3,14 @@ var port = chrome.runtime.connect({
 	name : "content-page"
 });
 
-function injectScript(file, node) {
-    var th = document.getElementsByTagName(node)[0];
-    var s = document.createElement('script');
-    s.setAttribute('type', 'text/javascript');
-    s.setAttribute('src', file);
-    th.appendChild(s);
+function injectScript(file) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', file);
+    head.appendChild(script);
 }
 
-injectScript( chrome.extension.getURL('resources/js/wxjsbridge.js'), 'header');
+if(!!~navigator.userAgent.indexOf('MicroMessenger')){
+	injectScript( chrome.extension.getURL('resources/js/wxjsbridge.js') );
+}

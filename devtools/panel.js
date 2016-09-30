@@ -1,4 +1,3 @@
-var tabId = chrome.devtools.inspectedWindow.tabId;
 
 var port = chrome.runtime.connect({
 	name : "devtools-page"
@@ -12,6 +11,7 @@ port.onMessage.addListener(function(msg){
   }
 });
 
+var tabId = chrome.devtools.inspectedWindow.tabId;
 port.postMessage({ action: 'request-cookies', tabId: tabId });
 
 var keys = [ 'Name', 'Value', 'Domain', 'Path', 'Expires/Max-Age', 'Size', 'HTTP', 'Secure', 'Samsite' ];

@@ -1,8 +1,5 @@
-var name = 'devtools-page';
 
-var tabId = chrome.devtools.inspectedWindow.tabId;
-
-var port = chrome.runtime.connect({ name : name });
+var port = chrome.runtime.connect({ name : 'devtools-page' });
 
 port.onMessage.addListener(function(msg){
   alert(msg.action);
