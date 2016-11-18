@@ -3,9 +3,17 @@ chrome.browserAction.setBadgeBackgroundColor({
 	color: [80, 80, 80, 255]
 });
 
-chrome.browserAction.setBadgeText({
-	text: "3"
-});
+
+
+setInterval(function(){
+	Ajax()
+	.get('https://api.lsong.org/beijingair')
+	.end(function(err, res){
+		chrome.browserAction.setBadgeText({
+			text: res[0].AQI
+		});
+	});
+}, 36e5);
 
 var menu = chrome.contextMenus.create({
   title    : 'My extension',

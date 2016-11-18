@@ -95,6 +95,10 @@
   WeixinJSBridge.prototype.shareTimeline = function(params){
     console.debug('[WeixinJSBridge] shareTimeline', params);
   };
+  
+  WeixinJSBridge.prototype.getNetworkType = function(){
+    return 'wifi';
+  };
 
   window.WeixinJSBridge = new WeixinJSBridge();
   window.WeixinJSBridge.init();
