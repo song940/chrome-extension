@@ -1,19 +1,66 @@
 
-chrome.browserAction.setBadgeBackgroundColor({
-	color: [80, 80, 80, 255]
+chrome.runtime.onConnect.addListener(function(port) {
+  console.log('connect: ', port.name);
+  
+  function onMessage(msg){
+    console.log('message from %s: ', port.name, msg);
+    
+    switch (msg.action) {
+      case 'request-cookies':
+        chrome.tabs.get(msg.tabId, function(tab){
+          chrome.cookies.getAll({ url: tab.url }, function(cookies) {
+            port.postMessage({ action: 'cookies', cookies: cookies });
+          });
+        });
+        break;
+      default:
+        
+    }
+  }
+
+  port.onMessage.addListener(onMessage);
+  port.onDisconnect.addListener(function(port){
+    console.log('disconnected: ', port.name);
+    port.onMessage.removeListener(onMessage);
+  });
+
 });
 
-
-
-setInterval(function(){
-	Ajax()
-	.get('https://api.lsong.org/beijingair')
-	.end(function(err, res){
-		chrome.browserAction.setBadgeText({
-			text: res[0].AQI
-		});
-	});
-}, 36e5);
+badge();
+function badge(){
+  Ajax()
+  .get('https://api.lsong.org/beijingair')
+  .end(function(err, res){
+    var AQI = parseInt(res[0].AQI, 10);
+    
+    chrome.notifications.create(null, {
+      type: 'basic',
+      iconUrl: 'https://api.lsong.org/qr?text=icon',
+      title: document.title,
+      message: 'current AQI ' + AQI,
+      buttons: [
+        { title: 'open' }
+      ]
+    }, function(notificationId){
+      console.log('notification: %s', notificationId);
+    });
+    
+    chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex){
+      chrome.tabs.create({ url: 'https://api.lsong.org/beijingair' });
+    });
+    
+    chrome.browserAction.setBadgeText({ text: String(AQI) });
+    chrome.browserAction.setBadgeBackgroundColor({
+      color: [ 
+        Math.min(255, 50 + AQI),
+        Math.max(0 , 255 - AQI),
+        80, 255
+      ]
+    });
+  });
+  
+  setTimeout(badge, 36e5);
+}
 
 var menu = chrome.contextMenus.create({
   title    : 'My extension',
@@ -34,36 +81,6 @@ var submenu = chrome.contextMenus.create({
 });
 
 
-chrome.runtime.onConnect.addListener(function(port) {
-	console.log('connect: ', port.name);
-
-  port.onMessage.addListener(function onMessage(msg){
-	  console.log('message: ', msg, port.name);
-	});
-	
-  port.onDisconnect.addListener(function(port){
-    console.log('Port %s has disconnected', port.name);
-    port.onMessage.removeListener(onMessage);
-  });
-
-});
-
-function getCookies(tabId, callback){
-	chrome.tabs.get(tabId, function(tab){
-		chrome.cookies.getAll({ url: tab.url }, callback);
-	});
-};
-
-
-chrome.notifications.create(null, {
-  type: 'basic',
-  iconUrl: 'https://api.lsong.org/qr?text=icon',
-  title: document.title,
-  message: 'hello world'
-}, function(){
-
-});
-
 
 /**
  * webRequest
@@ -82,5 +99,3 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
 
 chrome.webRequest.onSendHeaders.addListener(function(details) {
 }, filter, [ 'requestHeaders' ]);
-
-// chrome.tabs.create({url:'https://lsong.org'});

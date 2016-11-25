@@ -1,12 +1,11 @@
 
-var port = chrome.runtime.connect({
-	name : "devtools-page"
-});
+var port = chrome.runtime.connect({ name : "devtools-panel" });
 
 port.onMessage.addListener(function(msg){
   switch(msg.action){
     case 'cookies':
-    renderTable(msg.result);
+		console.log(msg.cookies);
+    renderTable(msg.cookies);
     break;
   }
 });

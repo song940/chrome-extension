@@ -1,5 +1,3 @@
 
-var port = chrome.runtime.connect({
-	name : "options-page"
-});
 
+var port = chrome.runtime.connect({ name : "options-page" });
