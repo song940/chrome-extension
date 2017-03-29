@@ -11,8 +11,8 @@ function getRandomColor() {
 chrome.topSites.get(function(topSites){
   console.log('newtab', topSites);  
   topSites.forEach(function(site){
+    var site = document.getElementById('site');
     var li = document.createElement('li');
-    li.style.backgroundColor = getRandomColor();
     
     var icon = document.createElement('img');
     icon.src = site.url + '/favicon.ico';
@@ -25,7 +25,9 @@ chrome.topSites.get(function(topSites){
     link.appendChild(document.createTextNode(site.title));
     li.appendChild(link);
     
-    document.body.appendChild(li);
+    // site.appendChild(li);
   });
 });
 
+
+var runner = new Runner('#game');
