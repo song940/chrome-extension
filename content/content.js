@@ -9,6 +9,4 @@ function injectScript(file) {
   head.appendChild(script);
 }
 
-if(!!~navigator.userAgent.indexOf('MicroMessenger')){
-  injectScript( chrome.extension.getURL('resources/js/wxjsbridge.js') );
-}
+injectScript( chrome.extension.getURL('resources/js/inject.js') );

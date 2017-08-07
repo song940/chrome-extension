@@ -1,0 +1,1 @@
+console.debug('chrome-extension: inject');
