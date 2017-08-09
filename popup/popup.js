@@ -1,7 +1,5 @@
 
-var port = chrome.runtime.connect({
-	name : "popup-page"
-});
+var port = chrome.runtime.connect({ name : "popup-page" });
 
 chrome.tabs.query({
 	active: true,

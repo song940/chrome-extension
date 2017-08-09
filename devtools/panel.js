@@ -4,14 +4,14 @@ var port = chrome.runtime.connect({ name : "devtools-panel" });
 port.onMessage.addListener(function(msg){
   switch(msg.action){
     case 'cookies':
-		console.log(msg.cookies);
+    console.log(msg.cookies);
     renderTable(msg.cookies);
     break;
   }
 });
 
 var tabId = chrome.devtools.inspectedWindow.tabId;
-port.postMessage({ action: 'request-cookies', tabId: tabId });
+port.postMessage({ action: 'cookies', tabId: tabId });
 
 var keys = [ 'Name', 'Value', 'Domain', 'Path', 'Expires/Max-Age', 'Size', 'HTTP', 'Secure', 'Samsite' ];
 

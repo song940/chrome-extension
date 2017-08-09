@@ -7,19 +7,40 @@
 h1{
   display: none;
 }
+ul{
+  padding: 0;
+}
+ul li{
+  display: inline-block;
+}
+label, input{
+  display: block;
+}
+ul li.tab{
+  display: none;
+}
 </style>
 </head>
 <body>
   <header>
     <h1>Options Page</h1>
   </header>
-  <div>
+  <div class="content">
     <nav>
-      <ul>
-        <li><a href="">Cookie</a></li>
-        <li><a href="">Basic Auth</a></li>
+      <ul id="menu" >
+        <li><a href="#cors">CORS</a></li>
       </ul>
     </nav>
+    <form id="cors" class="tab" >
+      <label for="access-control-allow-origin" >
+        Access-Control-Allow-Origin
+      </label>
+      <input placeholder="*" default="*"
+        id="access-control-allow-origin"
+        name="access-control-allow-origin" />
+      <button type="submit">save</button>
+      <button type="reset" >reset</button>
+    </form>
   </div>
 </body>
 <script src="options.js"></script>
