@@ -6,9 +6,9 @@
 <style>
 body{
   text-align: center;
-  background-image: url(https://unsplash.it/g/1440/776?random);
-  background-repeat: no-repeat;
+  background: rgba(0,0,0,.2);
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .container{
@@ -34,12 +34,21 @@ input[type=text]{
   text-align: center;
   border: 1px solid #ccc;
   background: rgba(0,0,0,.3);
-  
+}
+
+#copyright{
+  left: 50px;
+  bottom: 50px;
+  color: #fff;
+  padding: 2px;
+  position: absolute;
+  background: #000;
+  text-decoration: none;
 }
 
 </style>
 </head>
-<body>
+<body id="main">
 
   <div class="container" >
     
@@ -48,6 +57,8 @@ input[type=text]{
     </form>
     
   </div>
+
+  <a id="copyright" href="" ></a>
   
 </body>
 <script type="text/javascript" src="newtab.js"></script>
