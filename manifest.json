@@ -1,28 +1,36 @@
 {
-  "name": "My extension",
+  "name": "极客松",
   "manifest_version": 2,
   "description": "Toolbox for Hacker",
   "version": "1.0",
-  "author": "lsong",
+  "author": "Lsong",
   "options_page": "options/options.html",
   "devtools_page": "devtools/devtools.html",
   "omnibox": {
-    "keyword": "test"
+    "keyword": "gks"
   },
   "icons": {
-  	"16": "icons/icon.png",
-  	"48": "icons/icon.png",
-  	"128": "icons/icon.png"
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
   },
   "browser_action": {
     "default_icon": "icons/icon.png",
     "default_popup": "popup/popup.html"
   },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "css": ["content/content.css"],
-    "js": ["content/content.js"]
-  }],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "content/content.js"
+      ]
+    }
+  ],
   "background": {
     "page": "background/background.html"
   },

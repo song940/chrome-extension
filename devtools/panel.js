@@ -1,30 +1,9 @@
 
-var port = chrome.runtime.connect({ name : "devtools-panel" });
+const port = chrome.runtime.connect({ name: "devtools-panel" });
 
-port.onMessage.addListener(function(msg){
-  switch(msg.action){
-    case 'cookies':
-    console.log(msg.cookies);
-    renderTable(msg.cookies);
-    break;
-  }
+port.onMessage.addListener(msg => {
+  console.log('onMessage:', msg);
 });
 
-var tabId = chrome.devtools.inspectedWindow.tabId;
-port.postMessage({ action: 'cookies', tabId: tabId });
-
-var keys = [ 'Name', 'Value', 'Domain', 'Path', 'Expires/Max-Age', 'Size', 'HTTP', 'Secure', 'Samsite' ];
-
-function renderTable(cookies){
-  var table = document.createElement('table');
-  cookies.map(function(cookie){
-    var tr = document.createElement('tr');
-    Object.keys(cookie).map(function(key){
-      var td = document.createElement('td');
-      td.appendChild(document.createTextNode(cookie[key]));
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  });
-  document.body.appendChild(table);
-}
+const { tabId } = chrome.devtools.inspectedWindow;
+port.postMessage({ action: 'cookies', tabId });

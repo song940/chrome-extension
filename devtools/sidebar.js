@@ -1,2 +1,2 @@
 
-var port = chrome.runtime.connect({ name : "devtools-sidebar" });
+const port = chrome.runtime.connect({ name: "devtools-sidebar" });

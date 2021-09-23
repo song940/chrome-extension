@@ -1,76 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>New Tab</title>
-<style>
-body{
-  text-align: center;
-  background: rgba(0,0,0,.2);
-}
+  <meta charset="utf-8">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="newtab.css">
+  <script type="module" src="newtab.js"></script>
 
-.container{
-  width: 80%;
-  color: white;
-  margin: auto;
-  margin-top: 15%;
-}
-
-h1{
-  font-weight: lighter;
-  text-transform: uppercase;
-}
-
-input[type=text]{
-  width: 50%;
-  outline: 0px;
-  color: white;
-  margin-top: 50px;
-  padding: 10px 30px;
-  font-size: 32px;
-  font-family: monospace;
-  text-align: center;
-  border: 1px solid #ccc;
-  background: rgba(0,0,0,.3);
-}
-
-#copyright{
-  left: 50px;
-  bottom: 50px;
-  color: #fff;
-  padding: 2px;
-  position: absolute;
-  background: #000;
-  text-decoration: none;
-}
-
-#bg{
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  filter: blur(10px);
-  position: absolute;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-</style>
 </head>
-<body>
 
-  <div id="bg"></div>
-  <div class="container" >
-    
-    <form action="https://www.google.com/search">
-      <input name="q" type="text">
-    </form>
-    
-  </div>
+<body >
+  <blockquote class="content">
+    <svg class="quotation-mark" width="87.782" height="63.156" viewBox="0 0 87.782 63.156">
+      <path
+        d="M19.4 63.2c10.2 0 18-5.7 18.3-15.2.3-8.5-6.4-17-14.6-17-8.7 0-10 .3-10-3.6 0-10 14-19.2 19-21.3-.9-4.6-1.8-6.7-3.5-6A46.6 46.6 0 000 41.2c0 16.4 10.5 22 19.4 22zm50 0c10.2 0 18.1-5.7 18.4-15.2.3-8.5-6.4-17-14.6-17-8.7 0-10 .3-10-3.6 0-10 13.9-19.2 19-21.3-1-4.6-1.8-6.7-3.6-6a46.6 46.6 0 00-28.5 41c0 16.4 10.5 22 19.4 22z" />
+    </svg>
+    <p class="quote"></p>
+    <cite class="meta">
+      — <span class="author"></span>
+      <span class="source">
+        <em>@</em>
+        <a href="" class="source-link"></a><span class="source-episode"></span>
+      </span>
+    </cite>
+  </blockquote>
 
-  <a id="copyright" href="" ></a>
-  
+  <footer>
+    <strong class="days-between">#</strong>
+    <br />
+    <a class="latest-link" href="#">
+      <em>#<span class="latest-episode">36</span>: </em>
+      <span class="latest-title"></span>
+      <span class="new-badge">NEW</span>
+    </a>
+  </footer>
+
 </body>
-<script type="text/javascript" src="newtab.js"></script>
+
 </html>
