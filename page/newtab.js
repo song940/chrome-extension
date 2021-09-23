@@ -47,6 +47,14 @@ const dujitang = () => {
     .then(res => res.split(/\n/g))
 };
 
+const tuweiqinghua = () => {
+  return Promise
+    .resolve()
+    .then(() => fetch(`https://gist.githubusercontent.com/song940/0f9f27c84ab54985b1f6e999435bd2c0/raw/tuweiqinghua.txt`))
+    .then(res => res.text())
+    .then(res => res.split(/\n/g))
+};
+
 const updateQuote = ({ quotes, author, source }) => {
   const $quote = document.querySelector('.quote');
   const $author = document.querySelector('.author');
@@ -68,15 +76,26 @@ const sample = arr => {
 };
 
 (async () => {
-  const [bing, anyway, jitang] = await Promise.all([
-    bingImage(),
+  const [anyway, jitang, words] = await Promise.all([
+    // bingImage(),
     anywayFM(),
     dujitang(),
+    tuweiqinghua(),
   ]);
-  const [image] = bing.images;
   const { episodes, quotes, settings } = anyway;
   const quote = sample([
     ...quotes,
+    ...words.map((sentence, id) => {
+      return {
+        quotes: sentence,
+        author: 'Lsong',
+        source: {
+          id,
+          title: '土味情话',
+          link: 'https://gist.github.com/song940/0f9f27c84ab54985b1f6e999435bd2c0'
+        }
+      };
+    }),
     ...jitang.map((sentence, id) => {
       return {
         quotes: sentence,
