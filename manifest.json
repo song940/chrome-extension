@@ -1,6 +1,6 @@
 {
   "name": "极客松",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "description": "Toolbox for Hacker",
   "version": "1.0",
   "author": "Lsong",
@@ -14,8 +14,8 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
-  "browser_action": {
-    "default_icon": "icons/icon.png",
+  "action": {
+    "default_title": "Click to view a popup",
     "default_popup": "popup/popup.html"
   },
   "content_scripts": [
@@ -32,14 +32,13 @@
     }
   ],
   "background": {
-    "page": "background/background.html"
+    "service_worker": "serviceWorker.js"
   },
   "chrome_url_overrides": {
     "newtab": "page/newtab.html"
   },
   "options_ui": {
-    "page": "options/options.html",
-    "chrome_style": false
+    "page": "options/options.html"
   },
   "permissions": [
     "tabs",
@@ -54,14 +53,9 @@
     "contextMenus",
     "notifications",
     "clipboardRead",
-    "clipboardWrite",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "clipboardWrite"
   ],
-  "web_accessible_resources": [
-    "resources/js/inject.js"
-  ],
+  "host_permissions": [],
   "update_url": "https://lsong.org",
   "homepage_url": "https://lsong.org"
 }

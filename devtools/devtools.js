@@ -1,5 +1,5 @@
 
-const port = chrome.runtime.connect({ name: 'devtools-page' });
+// const port = chrome.runtime.connect({ name: 'devtools-page' });
 
 chrome.devtools.panels.elements.createSidebarPane("My Sidebar", sidebar => {
   sidebar.setPage("./devtools/sidebar.html");
