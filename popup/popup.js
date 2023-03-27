@@ -5,5 +5,5 @@ chrome.tabs.query({
 }, tabs => {
   const [currentTab] = tabs;
   const qrcode = document.getElementById('qrcode');
-  qrcode.src = 'https://api.lsong.me/qr?text=' + encodeURIComponent(currentTab.url);
+  qrcode.src = 'https://api.lsong.one:8443/qr?text=' + encodeURIComponent(currentTab.url);
 });

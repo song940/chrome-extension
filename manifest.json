@@ -32,7 +32,8 @@
     }
   ],
   "background": {
-    "service_worker": "serviceWorker.js"
+    "type": "module",
+    "service_worker": "service-worker.js"
   },
   "chrome_url_overrides": {
     "newtab": "page/newtab.html"
@@ -49,13 +50,18 @@
     "topSites",
     "downloads",
     "bookmarks",
-    "background",
     "contextMenus",
     "notifications",
     "clipboardRead",
-    "clipboardWrite"
+    "clipboardWrite",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
   ],
-  "host_permissions": [],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
   "update_url": "https://lsong.org",
   "homepage_url": "https://lsong.org"
 }
